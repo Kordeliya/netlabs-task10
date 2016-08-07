@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORMRepository", "ORMReposit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TESTORM", "TESTORM\TESTORM.csproj", "{7904C315-0147-418D-A109-D8E5E586E27A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{D1155080-66AE-4251-9222-BE9633049D9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{7904C315-0147-418D-A109-D8E5E586E27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7904C315-0147-418D-A109-D8E5E586E27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7904C315-0147-418D-A109-D8E5E586E27A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1155080-66AE-4251-9222-BE9633049D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1155080-66AE-4251-9222-BE9633049D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1155080-66AE-4251-9222-BE9633049D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1155080-66AE-4251-9222-BE9633049D9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

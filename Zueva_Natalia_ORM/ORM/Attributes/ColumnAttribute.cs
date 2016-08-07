@@ -10,10 +10,12 @@ namespace ORM.Attributes
     public sealed class ColumnAttribute : Attribute
     {
         private string columnName;
+        private bool isPrimaryKey;
 
-        public ColumnAttribute(string name)
+        public ColumnAttribute(string name, bool isPrimaryKey = false)
         {
-            columnName = name;
+            this.columnName = name;
+            this.isPrimaryKey = isPrimaryKey;
         }
     }
 }

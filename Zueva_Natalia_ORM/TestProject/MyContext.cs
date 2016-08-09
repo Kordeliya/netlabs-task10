@@ -10,8 +10,8 @@ namespace TestProject
 {
     public class MyContext : DBContext
     {
-        public MyContext(string connectionString)
-            : base(connectionString)
+        public MyContext(string connectionName)
+            : base(connectionName)
         {
         }
 

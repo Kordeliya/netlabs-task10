@@ -10,8 +10,10 @@ namespace TestProject
     {
         static void Main(string[] args)
         {
-            MyContext context = new MyContext("connectionString");
-            context.Books.
+            MyContext context = new MyContext("MyConName");
+            var book = context.Books.GetById(1);
+
+            Console.ReadKey();
         }
     }
 }

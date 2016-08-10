@@ -13,13 +13,10 @@ namespace ORM
     public abstract class DBContext
     {
         public DBContext(string connectionName)
-        {
-            
-
+        {            
             var connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
             ConnectionString = connectionString;
             //var connection = new SqlConnection(connectionString);
-
             Type ormType = this.GetType();
             PropertyInfo[] props = ormType.GetProperties();
             foreach (var p in props)
@@ -27,27 +24,11 @@ namespace ORM
                 if (p.PropertyType.GetGenericTypeDefinition() == typeof(IRepository<,>))
                 {
                     Type entityType = p.PropertyType.GenericTypeArguments[0];
-                    var attributes = entityType.CustomAttributes;
-                    if (attributes != null)
+                    DBTableObject obj = Mapper.TableMapper(entityType, p.Name);
+                    if (obj != null)
                     {
-                        foreach (var attr in attributes)
-                        {
-                            if (attr is TableAttribute)
-                            {
-                                var args = attr.ConstructorArguments;
-                                if(args != null)
-                                {
-                                    foreach (var arg in args)
-                                    {
-                                        if (arg is String)
-                                        {
-                                        }
-                                    }
-                                }
-                            }
-                        }
                     }
-
+                   
 
                 }
             }

@@ -8,6 +8,15 @@ namespace ORM
 {
     public class DBFieldObject
     {
-        public string ColumnName { get; set; }
+
+        public DBFieldObject(string name)
+        {
+            ColumnName = name;
+        }
+        public string ColumnName { get; private set; }
+
+        public string Value { get; set; }
+
+        public bool IsKey { get; set; }
     }
 }

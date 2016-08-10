@@ -1,45 +1,63 @@
-﻿using System;
+﻿using ORM.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ORM
 {
-    public class Mapper
+    public static class Mapper
     {
-        public DBTableObject TableMapper<Tentity>(Type entiry)
+        public static DBTableObject TableMapper(Type entity, string tableName)
         {
             DBTableObject obj = null;
-
-
-
+            string nameTable;
+            var attributes = entity.CustomAttributes;
 
             foreach (var attr in attributes)
             {
-                if (attr is TableAttribute)
+
+                if (attr.AttributeType == typeof(TableAttribute))
                 {
-                    var args = attr.ConstructorArguments;
-                    if (args != null)
+                    if (attr.ConstructorArguments != null)
+                        nameTable = attr.ConstructorArguments[0].Value.ToString();
+                    else
+                        nameTable = tableName;
+                    obj = new DBTableObject(nameTable);
+                    var propertyColumn = entity.GetProperties();
+                    foreach (var p in propertyColumn)
                     {
-                        foreach (var arg in args)
-                        {
-                            if (arg is String)
-                            {
-                            }
-                        }
+                        DBFieldObject field = FieldMapper(p);
+                        if (field != null)
+                            obj.Columns.Add(field);
                     }
                 }
             }
-
-
-
             return obj;
         }
 
-        public DBFieldObject FieldMapper<Tentity>(Tentity entiry)
+        public static DBFieldObject FieldMapper(PropertyInfo property)
         {
             DBFieldObject obj = null;
+            string nameColumn;
+            var attributes = property.CustomAttributes;
+
+            foreach (var attr in attributes)
+            {
+
+                if (attr.AttributeType == typeof(ColumnAttribute))
+                {
+                    if (attr.ConstructorArguments != null)
+                        nameColumn = attr.ConstructorArguments[0].Value.ToString();
+                    else
+                        nameColumn = property.Name;
+                    obj = new DBFieldObject(nameColumn);
+                    //проверка ключ ли
+                  
+                }
+            }
             return obj;
         }
 

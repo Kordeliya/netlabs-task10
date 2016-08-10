@@ -2,8 +2,6 @@ D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TestProject\bin\Debug\TestProject.ex
 D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TestProject\bin\Debug\TestProject.exe
 D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TestProject\bin\Debug\TestProject.pdb
 D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TestProject\bin\Debug\ORM.dll
-D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TestProject\bin\Debug\ORMRepository.dll
-D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TestProject\bin\Debug\ORMRepository.pdb
 D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TestProject\bin\Debug\ORM.pdb
 D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TestProject\obj\Debug\TestProject.csprojResolveAssemblyReference.cache
 D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TestProject\obj\Debug\TestProject.exe

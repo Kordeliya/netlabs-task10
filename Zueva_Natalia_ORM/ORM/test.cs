@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ORM
 {
-    public class test : IRepository<TEntity,TKey>
-        where TEntity : class
-    {
-    }
+    //public class test : IRepository<TEntity,TKey>
+    //{
+    //}
 }

@@ -25,7 +25,7 @@ namespace ORM
                         nameTable = attr.ConstructorArguments[0].Value.ToString();
                     else
                         nameTable = tableName;
-                    obj = new DBTableObject(nameTable);
+                    obj = new DBTableObject(nameTable,entity.GetType());
                     var propertyColumn = entity.GetProperties();
                     foreach (var p in propertyColumn)
                     {
@@ -53,13 +53,23 @@ namespace ORM
                         nameColumn = attr.ConstructorArguments[0].Value.ToString();
                     else
                         nameColumn = property.Name;
-                    obj = new DBFieldObject(nameColumn);
+                    obj = new DBFieldObject(nameColumn, property.GetType());
                     //проверка ключ ли
                   
                 }
             }
             return obj;
         }
+
+
+        public static Object BackTableMapper(DBTableObject obj)
+        {
+            Object result = null;
+            result.GetType();
+            return result;
+          
+        }
+
 
 
     }

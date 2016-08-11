@@ -8,14 +8,17 @@ namespace ORM
 {
     public class DBTableObject
     {
-        public DBTableObject(string name)
+        public DBTableObject(string name, Type type)
         {
             NameTable = name;
             Columns = new List<DBFieldObject>();
+            Type = type;
         }
 
         public string NameTable { get; private set; }
 
         public List<DBFieldObject> Columns { get; set; }
+
+        public Type Type { get; set; }
     }
 }

@@ -42,6 +42,9 @@
   <ItemGroup>
     <Compile Include="Attributes\ColumnAttribute.cs" />
     <Compile Include="Attributes\TableAttribute.cs" />
+    <Compile Include="Connection\Connection.cs" />
+    <Compile Include="Connection\ConnectionFactory.cs" />
+    <Compile Include="Connection\SQLConnection.cs" />
     <Compile Include="DataMapper\DBFieldObject.cs" />
     <Compile Include="DataMapper\DBTableObject.cs" />
     <Compile Include="DataMapper\Mapper.cs" />

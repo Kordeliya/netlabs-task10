@@ -45,6 +45,7 @@
     <Compile Include="Connection\Connection.cs" />
     <Compile Include="Connection\ConnectionFactory.cs" />
     <Compile Include="Connection\SQLConnection.cs" />
+    <Compile Include="Connection\SQLConnectionFactory.cs" />
     <Compile Include="DataMapper\DBFieldObject.cs" />
     <Compile Include="DataMapper\DBTableObject.cs" />
     <Compile Include="DataMapper\Mapper.cs" />
@@ -52,7 +53,6 @@
     <Compile Include="DBRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="test.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,27 +8,32 @@ namespace ORM
 {
     public class DBRepository<TEntity, TKey> : IRepository<TEntity, TKey>
     {
+        public DBRepository(DBTableObject tableInfo, ConnectionFactory factory)
+        {
+            InfoTable = tableInfo;
+            ConFactory = factory;
+        }
+
+        public ConnectionFactory ConFactory { get; set; }
+
         public DBTableObject InfoTable { get; set; }
 
-        public Connection Connect {get;set;}
 
-        public TEntity GetByKey(TKey primaryKey)
+        public TEntity GetById(TKey primaryKey)
         {
             TEntity entity;
-            string sql = String.Format("SELECT * FROM {0} WHERE {1} = {2}", 
-                                    InfoTable.NameTable,InfoTable.Columns.Where(c=>c.IsKey==true).FirstOrDefault(), primaryKey);
+            string sql = String.Format("SELECT * FROM {0} WHERE {1} = {2}",
+                                    InfoTable.NameTable, InfoTable.Columns.Where(c => c.IsKey == true).FirstOrDefault(), primaryKey);
 
-            Connect.ExecuteCommand(sql);
-            entity = (TEntity)Mapper.BackTableMapper(InfoTable);
+            var reader = ConFactory.Connection.ExecuteCommand(sql);
+            entity = (TEntity)Mapper.BackTableMapper(InfoTable, reader);
             return entity;
         }
 
-
-
-
-        public IEnumerable<DBTableObject> GetList()
+        IEnumerable<TEntity> IRepository<TEntity, TKey>.GetList()
         {
             throw new NotImplementedException();
         }
+    }
     
 }

@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ORM
 {
-    public interface IRepository<TEntity, TKey>
+    public class SQLConnectionFactory : ConnectionFactory
     {
-        TEntity GetById(TKey primaryKey);
+        public SQLConnectionFactory(string nameConfig)
+        {
 
-        IEnumerable<TEntity> GetList();
+        }
     }
 }

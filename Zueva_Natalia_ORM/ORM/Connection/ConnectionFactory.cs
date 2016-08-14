@@ -8,6 +8,6 @@ namespace ORM
 {
     public abstract class ConnectionFactory
     {
-        Connection connect { get; set; }
+        public Connection Connection { get; set; }
     }
 }

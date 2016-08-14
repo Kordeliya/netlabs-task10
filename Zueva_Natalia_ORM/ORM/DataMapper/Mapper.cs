@@ -1,6 +1,7 @@
 ﻿using ORM.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -31,7 +32,11 @@ namespace ORM
                     {
                         DBFieldObject field = FieldMapper(p);
                         if (field != null)
+                        {
                             obj.Columns.Add(field);
+                            if (field.IsKey == true)
+                                obj.TypeKey = field.Type;
+                        }
                     }
                 }
             }
@@ -54,17 +59,19 @@ namespace ORM
                     else
                         nameColumn = property.Name;
                     obj = new DBFieldObject(nameColumn, property.GetType());
-                    //проверка ключ ли
-                  
+                    
+                    obj.IsKey = (bool)attr.ConstructorArguments[1].Value;
                 }
             }
             return obj;
         }
 
 
-        public static Object BackTableMapper(DBTableObject obj)
+        public static Object BackTableMapper(DBTableObject obj, IDataReader reader)
         {
-            Object result = null;
+            //Object result = null;
+            var result = Activator.CreateInstance(obj.Type);
+
             result.GetType();
             return result;
           

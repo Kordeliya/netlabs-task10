@@ -7,7 +7,7 @@ using ORM;
 
 namespace Repositories
 {
-    public class SQLRepository<TEntity, TKey> : IRepository<TEntity, TKey>
-    {
-    }
+    //public class SQLRepository<TEntity, TKey> : IRepository<TEntity, TKey>
+    //{
+    //}
 }

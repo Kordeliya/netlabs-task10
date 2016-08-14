@@ -1,5 +1,4 @@
 ﻿using ORM.Attributes;
-using ORM.Connection;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,7 +16,7 @@ namespace ORM
         {            
             var connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
             ConnectionString = connectionString;
-            ConnectionFactory connect;
+            ConnectionFactory factory = new SQLConnectionFactory(ConnectionString);
 
             Type ormType = this.GetType();
             PropertyInfo[] props = ormType.GetProperties();
@@ -29,8 +28,8 @@ namespace ORM
                     DBTableObject obj = Mapper.TableMapper(entityType, p.Name);
                     if (obj != null)
                     {
-                       // var repository = new DBRepository<typeof(entityType),int>()
-                        p.SetValue(ormType,repository);
+                       //var repository = new DBRepository<ormType.FullName,>(obj, factory);
+                       // p.SetValue(ormType,repository);
                     }
                    
 

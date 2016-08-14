@@ -20,5 +20,7 @@ namespace ORM
         public List<DBFieldObject> Columns { get; set; }
 
         public Type Type { get; set; }
+
+        public Type TypeKey { get; set; }
     }
 }

@@ -3,3 +3,8 @@ D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TESTORM\bin\Debug\TESTORM.pdb
 D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TESTORM\obj\Debug\TESTORM.csprojResolveAssemblyReference.cache
 D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TESTORM\obj\Debug\TESTORM.dll
 D:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TESTORM\obj\Debug\TESTORM.pdb
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TESTORM\bin\Debug\TESTORM.dll
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TESTORM\bin\Debug\TESTORM.pdb
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TESTORM\obj\Debug\TESTORM.csprojResolveAssemblyReference.cache
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TESTORM\obj\Debug\TESTORM.dll
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\TESTORM\obj\Debug\TESTORM.pdb

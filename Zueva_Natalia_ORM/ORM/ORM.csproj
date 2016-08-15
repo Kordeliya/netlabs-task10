@@ -42,17 +42,28 @@
   <ItemGroup>
     <Compile Include="Attributes\ColumnAttribute.cs" />
     <Compile Include="Attributes\TableAttribute.cs" />
-    <Compile Include="Connection\Connection.cs" />
-    <Compile Include="Connection\ConnectionFactory.cs" />
-    <Compile Include="Connection\SQLConnection.cs" />
-    <Compile Include="Connection\SQLConnectionFactory.cs" />
-    <Compile Include="DataMapper\DBFieldObject.cs" />
-    <Compile Include="DataMapper\DBTableObject.cs" />
-    <Compile Include="DataMapper\Mapper.cs" />
+    <Compile Include="DataMapper\DBFieldObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataMapper\DBTableObject.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataMapper\Mapper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataMapper\MapperHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DBContext.cs" />
     <Compile Include="DBRepository.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBConnect\DBConnect.csproj">
+      <Project>{4b07cb77-2a3b-4f63-9857-0eef387000c8}</Project>
+      <Name>DBConnect</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

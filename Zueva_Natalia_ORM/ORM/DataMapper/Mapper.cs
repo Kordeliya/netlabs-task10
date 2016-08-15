@@ -71,8 +71,39 @@ namespace ORM
         {
             //Object result = null;
             var result = Activator.CreateInstance(obj.Type);
+            Type type= result.GetType();
+            var properties = type.GetProperties();
+            string fieldName;
 
-            result.GetType();
+             while (reader.Read())
+                {
+                    foreach (var item in obj.Columns)
+                    {
+                        foreach (var prop in properties)
+                        {
+                            if (prop.CustomAttributes != null)
+                            {
+                                foreach(var attr in prop.CustomAttributes)
+                                {
+                                    if (attr.AttributeType == typeof(ColumnAttribute))
+                                    {
+                                        if (attr.ConstructorArguments != null)
+                                            fieldName = attr.ConstructorArguments[0].Value.ToString();
+                                        else
+                                            fieldName = prop.Name;
+
+                                        Type typeHelper = typeof(MapperHelper<>).MakeGenericType(item.Type);
+                                        var helper = (IRepository)Activator.CreateInstance(typeHelper, null);
+                                        
+                                        //prop.SetValue = MapperHelper.Read<item.Type>(reader, fieldName);
+
+                                       
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             return result;
           
         }

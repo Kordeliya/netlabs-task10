@@ -1,4 +1,5 @@
-﻿using ORM.Attributes;
+﻿using DBConnect;
+using ORM.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -22,17 +23,22 @@ namespace ORM
             PropertyInfo[] props = ormType.GetProperties();
             foreach (var p in props)
             {
-                if (p.PropertyType.GetGenericTypeDefinition() == typeof(IRepository<,>))
+                if (p.PropertyType.IsGenericType)
                 {
-                    Type entityType = p.PropertyType.GenericTypeArguments[0];
-                    DBTableObject obj = Mapper.TableMapper(entityType, p.Name);
-                    if (obj != null)
+                    if (p.PropertyType.GetGenericTypeDefinition() == typeof(IRepository<,>))
                     {
-                       //var repository = new DBRepository<ormType.FullName,>(obj, factory);
-                       // p.SetValue(ormType,repository);
-                    }
-                   
+                        Type entityType = p.PropertyType.GenericTypeArguments[0];
+                        Type keyType = p.PropertyType.GenericTypeArguments[1];
+                        DBTableObject obj = Mapper.TableMapper(entityType, p.Name);
+                        if (obj != null)
+                        {
+                            Type type = typeof(DBRepository<,>).MakeGenericType(entityType, keyType);
+                            var repository = Activator.CreateInstance(type, obj, factory);
 
+                            p.SetValue(this, repository);
+                            // p.SetValue(this, Convert.ChangeType(repository, p.PropertyType), null);
+                        }
+                    }
                 }
             }
 

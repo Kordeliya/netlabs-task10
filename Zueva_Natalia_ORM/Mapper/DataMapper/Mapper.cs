@@ -25,7 +25,7 @@ namespace DataMapper
                         nameTable = attr.ConstructorArguments[0].Value.ToString();
                     else
                         nameTable = tableName;
-                    obj = new DBTableObject(nameTable,entity.GetType());
+                    obj = new DBTableObject(nameTable, entity.GetType());
                     var propertyColumn = entity.GetProperties();
                     foreach (var p in propertyColumn)
                     {
@@ -58,7 +58,7 @@ namespace DataMapper
                     else
                         nameColumn = property.Name;
                     obj = new DBFieldObject(nameColumn, property.GetType());
-                    
+
                     obj.IsKey = (bool)attr.ConstructorArguments[1].Value;
                 }
             }
@@ -69,43 +69,43 @@ namespace DataMapper
         public static Object BackTableMapper(DBTableObject obj, IDataReader reader)
         {
             var result = Activator.CreateInstance(obj.Type);
-            Type type= result.GetType();
+            Type type = result.GetType();
             var properties = type.GetProperties();
             string fieldName;
 
-             while (reader.Read())
+            while (reader.Read())
+            {
+                foreach (var item in obj.Columns)
                 {
-                    foreach (var item in obj.Columns)
+                    foreach (var prop in properties)
                     {
-                        foreach (var prop in properties)
+                        if (prop.CustomAttributes != null)
                         {
-                            if (prop.CustomAttributes != null)
+                            foreach (var attr in prop.CustomAttributes)
                             {
-                                foreach(var attr in prop.CustomAttributes)
+                                if (attr.AttributeType == typeof(ColumnAttribute))
                                 {
-                                    if (attr.AttributeType == typeof(ColumnAttribute))
-                                    {
-                                        if (attr.ConstructorArguments != null)
-                                            fieldName = attr.ConstructorArguments[0].Value.ToString();
-                                        else
-                                            fieldName = prop.Name;
+                                    if (attr.ConstructorArguments != null)
+                                        fieldName = attr.ConstructorArguments[0].Value.ToString();
+                                    else
+                                        fieldName = prop.Name;
 
-                                        //Type typeHelper = typeof(MapperHelper<>).MakeGenericType(item.Type);
-                                        //var helper = (IRepository)Activator.CreateInstance(typeHelper, null);
+                                    Type typeHelper = typeof(MapperHelper<>).MakeGenericType(item.Type);
 
-                                        //prop.SetValue = MapperHelper.Read<item.Type>(reader, fieldName);
+                                    var methodInfo = typeHelper.GetMethod("Read");
 
+                                    var resultRead = methodInfo.Invoke(null, new object[] {fieldName, reader});
+                                    //var helper = (MapperHelper<>)Activator.CreateInstance(typeHelper, null);
 
-                                    }
+                                    prop.SetValue(result, resultRead);
                                 }
                             }
                         }
                     }
                 }
+            }
             return result;
-          
         }
-
 
 
     }

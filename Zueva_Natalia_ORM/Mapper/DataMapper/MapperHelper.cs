@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace DataMapper
 {
-    public static class MapperHelper
+    public static class MapperHelper<T>
     {
-        public static T Read<T>(DbDataReader DataReader, string FieldName)
+        public static T Read(string fieldName, DbDataReader dataReader)
         {
             int FieldIndex;
-            try { FieldIndex = DataReader.GetOrdinal(FieldName); }
+            try { FieldIndex = dataReader.GetOrdinal(fieldName); }
             catch { return default(T); }
 
-            if (DataReader.IsDBNull(FieldIndex))
+            if (dataReader.IsDBNull(FieldIndex))
             {
                 return default(T);
             }
             else
             {
-                object readData = DataReader.GetValue(FieldIndex);
+                object readData = dataReader.GetValue(FieldIndex);
                 if (readData is T)
                 {
                     return (T)readData;

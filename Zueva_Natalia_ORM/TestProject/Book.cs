@@ -1,4 +1,4 @@
-﻿using ORM.Attributes;
+﻿using DataMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +14,9 @@ namespace TestProject
         public int Id { get; set; }
 
         [Column("Name")]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         [Column("Author")]
-        public int Author { get; set; }
+        public string Author { get; set; }
     }
 }

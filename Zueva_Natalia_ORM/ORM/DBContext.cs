@@ -1,5 +1,5 @@
-﻿using DBConnect;
-using ORM.Attributes;
+﻿using DataMapper;
+using DBConnect;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -36,7 +36,6 @@ namespace ORM
                             var repository = Activator.CreateInstance(type, obj, factory);
 
                             p.SetValue(this, repository);
-                            // p.SetValue(this, Convert.ChangeType(repository, p.PropertyType), null);
                         }
                     }
                 }
@@ -45,8 +44,6 @@ namespace ORM
         }
 
         public string ConnectionString { get; private set; }
-
-        private Lazy<DbConnection> connection { get; set; }
 
     }
 }

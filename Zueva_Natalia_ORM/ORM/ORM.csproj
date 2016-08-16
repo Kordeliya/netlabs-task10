@@ -40,20 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Attributes\ColumnAttribute.cs" />
-    <Compile Include="Attributes\TableAttribute.cs" />
-    <Compile Include="DataMapper\DBFieldObject.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DataMapper\DBTableObject.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DataMapper\Mapper.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="DataMapper\MapperHelper.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="DBContext.cs" />
     <Compile Include="DBRepository.cs" />
     <Compile Include="IRepository.cs" />
@@ -63,6 +49,10 @@
     <ProjectReference Include="..\DBConnect\DBConnect.csproj">
       <Project>{4b07cb77-2a3b-4f63-9857-0eef387000c8}</Project>
       <Name>DBConnect</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mapper\DataMapper.csproj">
+      <Project>{12657bbb-aebe-4f48-ae9e-333efb3f1824}</Project>
+      <Name>DataMapper</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

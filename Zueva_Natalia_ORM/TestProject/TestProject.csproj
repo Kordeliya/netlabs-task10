@@ -50,10 +50,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Mapper\DataMapper.csproj">
+      <Project>{12657bbb-aebe-4f48-ae9e-333efb3f1824}</Project>
+      <Name>DataMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ORM\ORM.csproj">
       <Project>{aa7d58cf-8f61-4ffe-83b9-b6567c56cc82}</Project>
       <Name>ORM</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\ForTEST.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

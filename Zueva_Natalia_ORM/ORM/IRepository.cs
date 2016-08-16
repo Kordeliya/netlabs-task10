@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace ORM
 {
-    public interface IRepository
-    {
-    }
-
-    public interface IRepository<TEntity, TKey> : IRepository
+    public interface IRepository<TEntity, TKey>
     {
         TEntity GetById(TKey primaryKey);
 

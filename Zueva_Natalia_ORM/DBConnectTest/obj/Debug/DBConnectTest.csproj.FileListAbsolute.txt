@@ -1,0 +1,7 @@
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\DBConnectTest\obj\Debug\DBConnectTest.csprojResolveAssemblyReference.cache
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\DBConnectTest\bin\Debug\DBConnectTest.dll
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\DBConnectTest\bin\Debug\DBConnectTest.pdb
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\DBConnectTest\bin\Debug\DBConnect.dll
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\DBConnectTest\bin\Debug\DBConnect.pdb
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\DBConnectTest\obj\Debug\DBConnectTest.dll
+C:\GIT\ORM\netlabs-task10\Zueva_Natalia_ORM\DBConnectTest\obj\Debug\DBConnectTest.pdb

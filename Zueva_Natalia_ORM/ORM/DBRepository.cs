@@ -26,7 +26,7 @@ namespace ORM
         {
             TEntity entity;
             string sql = String.Format("SELECT * FROM {0} WHERE {1} = {2}",
-                                    InfoTable.NameTable, InfoTable.Columns.Where(c => c.IsKey == true).FirstOrDefault(), primaryKey);
+                                    InfoTable.NameTable, InfoTable.Columns.Where(c => c.IsKey == true).FirstOrDefault().ColumnName, primaryKey);
 
             var reader = ConFactory.DbConnection.ExecuteCommand(sql);
             entity = (TEntity)Mapper.BackTableMapper(InfoTable, reader);

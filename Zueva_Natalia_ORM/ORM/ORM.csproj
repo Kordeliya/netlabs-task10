@@ -43,6 +43,7 @@
     <Compile Include="DBContext.cs" />
     <Compile Include="DBRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="ORMException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

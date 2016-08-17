@@ -17,7 +17,9 @@ namespace ORM
         {            
             var connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
             ConnectionString = connectionString;
-            ConnectionFactory factory = new SQLConnectionFactory(ConnectionString);
+            var provider = ConfigurationManager.ConnectionStrings[connectionName].ProviderName;
+
+            ConnectionFactory factory = GetFactory(provider, ConnectionString); 
 
             Type ormType = this.GetType();
             PropertyInfo[] props = ormType.GetProperties();
@@ -41,6 +43,21 @@ namespace ORM
                 }
             }
 
+        }
+
+        private ConnectionFactory GetFactory(string provider, string connectionString)
+        {
+            switch (provider)
+            {
+                case "System.Data.SqlClient" :
+                    return new SQLConnectionFactory(connectionString);
+                    break;
+                case "System.Data.SqlServerCe.4.0":
+                    return new SQLCeConnectionFactory(connectionString);
+                    break;
+                default :
+                    throw new ORMException("Unknown  dbprovider");
+            }                
         }
 
         public string ConnectionString { get; private set; }

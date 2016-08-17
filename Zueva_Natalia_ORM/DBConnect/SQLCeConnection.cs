@@ -18,22 +18,16 @@ namespace DBConnect
         public override IDataReader ExecuteCommand(string command)
         {
             Object result = null;
-            SqlCeDataAdapter dataAdapter = new SqlCeDataAdapter(command, (SqlCeConnection)Connection);
+            SqlCeCommand sqlCommand = new SqlCeCommand(command, (SqlCeConnection)Connection);
             Connection.Open();
             try
             {
-                DataSet dataSet = new DataSet();                    
-                dataAdapter.Fill(dataSet, "result");
-                var reader = dataSet.CreateDataReader();
+                var reader = sqlCommand.ExecuteReader();
                 return reader;
             }
             catch (Exception ex)
             {
                 return null;
-            }
-            finally
-            {
-                Connection.Close();
             }
         }
     }

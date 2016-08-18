@@ -15,15 +15,41 @@ namespace DBConnect
             Connection = conection;
         }
 
-        public override IDataReader ExecuteCommand(string command)
+        public override void ExecuteCommand(string command)
         {
-            Object result = null;
+            if (Connection.State != ConnectionState.Open)
+            {
+                Connection.Open();
+            }
             SqlCommand sqlCommand = new SqlCommand(command, (SqlConnection)Connection);
-            Connection.Open();
             try
             {
-                var reader = sqlCommand.ExecuteReader();
-                return reader;
+                var result = sqlCommand.ExecuteNonQuery();
+                if(result == -1)
+                    throw new Exception();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception();
+            }
+            finally
+            {
+                Connection.Close();
+            }
+        }
+
+        public override DataSet ExecuteCommand(string command, string nameTable)
+        {
+            DataSet result = null;
+            if (Connection.State != ConnectionState.Open)
+            {
+                Connection.Open();
+            }
+            SqlDataAdapter adapter = new SqlDataAdapter(command, (SqlConnection)Connection);
+            try
+            {
+                adapter.Fill(result, nameTable);
+                return result;
             }
             catch (Exception ex)
             {

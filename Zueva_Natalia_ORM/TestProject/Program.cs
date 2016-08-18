@@ -11,6 +11,9 @@ namespace TestProject
         static void Main(string[] args)
         {
             MyContext context = new MyContext("MyConName");
+
+           // context.Books.CreateNew(new Book{Name = "Идиот", Author="Достоевский"});
+
             var book = context.Books.GetById(1);
 
             Console.ReadKey();

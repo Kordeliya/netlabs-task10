@@ -13,7 +13,9 @@ namespace DBConnect
 
         public DbConnection Connection { get; set; }
 
-        public abstract IDataReader ExecuteCommand(string command);
+        public abstract void ExecuteCommand(string command);
+
+        public abstract DataSet ExecuteCommand(string command, string nameTable);
 
     }
 }

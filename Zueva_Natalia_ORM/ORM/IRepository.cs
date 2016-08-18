@@ -11,6 +11,9 @@ namespace ORM
         TEntity GetById(TKey primaryKey);
 
         IEnumerable<TEntity> GetList();
+
+        void CreateNew(TEntity entity);
+
     }
 
 }

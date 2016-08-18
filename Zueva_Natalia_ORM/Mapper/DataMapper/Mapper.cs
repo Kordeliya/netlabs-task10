@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,7 +26,7 @@ namespace DataMapper
                         nameTable = attr.ConstructorArguments[0].Value.ToString();
                     else
                         nameTable = tableName;
-                    obj = new DBTableObject(nameTable, entity.GetType());
+                    obj = new DBTableObject(nameTable, entity);
                     var propertyColumn = entity.GetProperties();
                     foreach (var p in propertyColumn)
                     {
@@ -57,7 +58,7 @@ namespace DataMapper
                         nameColumn = attr.ConstructorArguments[0].Value.ToString();
                     else
                         nameColumn = property.Name;
-                    obj = new DBFieldObject(nameColumn, property.GetType());
+                    obj = new DBFieldObject(nameColumn, property.PropertyType);
 
                     obj.IsKey = (bool)attr.ConstructorArguments[1].Value;
                 }
@@ -66,14 +67,14 @@ namespace DataMapper
         }
 
 
-        public static Object BackTableMapper(DBTableObject obj, IDataReader reader)
+        public static Object BackTableMapper(DBTableObject obj, DataSet dataset,string tableName)
         {
             var result = Activator.CreateInstance(obj.Type);
             Type type = result.GetType();
             var properties = type.GetProperties();
             string fieldName;
 
-            while (reader.Read())
+            foreach (DataRow pRow in dataset.Tables[tableName].Rows)
             {
                 foreach (var item in obj.Columns)
                 {
@@ -90,14 +91,7 @@ namespace DataMapper
                                     else
                                         fieldName = prop.Name;
 
-                                    Type typeHelper = typeof(MapperHelper<>).MakeGenericType(item.Type);
-
-                                    var methodInfo = typeHelper.GetMethod("Read");
-
-                                    var resultRead = methodInfo.Invoke(null, new object[] {fieldName, reader});
-                                    //var helper = (MapperHelper<>)Activator.CreateInstance(typeHelper, null);
-
-                                    prop.SetValue(result, resultRead);
+                                    prop.SetValue(result, pRow[fieldName]);
                                 }
                             }
                         }
@@ -105,6 +99,39 @@ namespace DataMapper
                 }
             }
             return result;
+
+
+            //while (reader.Read())
+            //{
+            //    foreach (var item in obj.Columns)
+            //    {
+            //        foreach (var prop in properties)
+            //        {
+            //            if (prop.CustomAttributes != null)
+            //            {
+            //                foreach (var attr in prop.CustomAttributes)
+            //                {
+            //                    if (attr.AttributeType == typeof(ColumnAttribute))
+            //                    {
+            //                        if (attr.ConstructorArguments != null)
+            //                            fieldName = attr.ConstructorArguments[0].Value.ToString();
+            //                        else
+            //                            fieldName = prop.Name;
+
+            //                        Type typeHelper = typeof(MapperHelper<>).MakeGenericType(item.Type);
+
+            //                        var methodInfo = typeHelper.GetMethod("Read");
+
+            //                        var resultRead = methodInfo.Invoke(null, new object[] {fieldName, reader});
+            //                        //var helper = (MapperHelper<>)Activator.CreateInstance(typeHelper, null);
+
+            //                        prop.SetValue(result, resultRead);
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+
         }
 
 

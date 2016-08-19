@@ -10,9 +10,13 @@ namespace ORM
     {
         TEntity GetById(TKey primaryKey);
 
-        IEnumerable<TEntity> GetList();
+        IList<TEntity> GetList();
 
         void CreateNew(TEntity entity);
+
+        void DeleteById(TKey primaryKey);
+
+        void Update(TEntity entity);
 
     }
 

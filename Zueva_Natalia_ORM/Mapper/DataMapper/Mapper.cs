@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -69,13 +70,16 @@ namespace DataMapper
 
         public static Object BackTableMapper(DBTableObject obj, DataSet dataset,string tableName)
         {
-            var result = Activator.CreateInstance(obj.Type);
-            Type type = result.GetType();
-            var properties = type.GetProperties();
+            var listType = typeof(List<>).MakeGenericType(obj.Type);
+            var result = Activator.CreateInstance(listType);           
             string fieldName;
 
             foreach (DataRow pRow in dataset.Tables[tableName].Rows)
             {
+                var itemResult = Activator.CreateInstance(obj.Type);
+                Type type = itemResult.GetType();
+                var properties = type.GetProperties();
+
                 foreach (var item in obj.Columns)
                 {
                     foreach (var prop in properties)
@@ -91,12 +95,13 @@ namespace DataMapper
                                     else
                                         fieldName = prop.Name;
 
-                                    prop.SetValue(result, pRow[fieldName]);
+                                    prop.SetValue(itemResult, pRow[fieldName]);
                                 }
                             }
                         }
                     }
                 }
+                ((IList)result).Add(itemResult);
             }
             return result;
 

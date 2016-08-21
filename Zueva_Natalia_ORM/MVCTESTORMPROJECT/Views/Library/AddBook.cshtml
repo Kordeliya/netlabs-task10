@@ -1,0 +1,37 @@
+﻿@model MVCTESTORMPROJECT.Entity.Book
+@{
+    ViewBag.Title = "Добавление новой книги";
+}
+
+<div class="title">
+    <h2>@ViewBag.Title</h2>
+</div>
+<br />
+@using (Html.BeginForm()) {
+    <div class="row">
+        <div class="span12">
+            @Html.ValidationSummary(true)
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="span4 control-group">
+            <div>@Html.LabelFor(model => model.Name)</div>
+            <div>@Html.TextBoxFor(model =>model.Name)</div>
+        </div>
+    </div>
+        <div class="row">
+        <div class="span4 control-group">
+            <div>@Html.LabelFor(model => model.Author)</div>
+            <div>@Html.TextBoxFor(model =>model.Author)</div>
+        </div>
+    </div>
+    <br/><br/><br/>
+    <div class="row">
+        <div class="span12 control-group">
+            <button class="btn btn-primary" type="submit" >Сохранить</button>
+            @Html.ActionLink("Назад к списку", "Index", "Book", new {@class= "btn btn-warning"})
+        </div>
+    </div>
+}
+

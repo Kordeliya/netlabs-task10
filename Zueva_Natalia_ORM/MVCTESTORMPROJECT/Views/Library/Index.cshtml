@@ -1,0 +1,35 @@
+﻿@model List<MVCTESTORMPROJECT.Entity.Book>
+@{
+    ViewBag.Title = "Список книг";
+}
+
+<h2>@ViewBag.Title</h2>
+<br/>
+    @Html.ActionLink("Добавить книгу", "AddBook", "Library", new {@class= "btn btn-default"})
+<br/><br/>
+<table >
+    <thead>
+        <tr>
+            <th>Название книги</th>
+            <th>Автор</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Author</td>
+                     <td>
+                        <a style="padding:5px" href="@Url.Action("Delete", "Library", new { @id = @item.Id})">Удалить</a>
+                        <a style="padding:5px" href="@Url.Action("EditBook", "Library", new { @id = @item.Id})">Изменить</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

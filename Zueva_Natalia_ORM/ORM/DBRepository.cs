@@ -136,7 +136,7 @@ namespace ORM
         {
             string fieldName = String.Empty;
             string where = String.Empty;
-            StringBuilder sql = new StringBuilder(String.Format("UPDATE {0} SET", InfoTable.NameTable));
+            StringBuilder sql = new StringBuilder(String.Format("UPDATE {0} SET ", InfoTable.NameTable));
             for (var column = 0; column < InfoTable.Columns.Count(); column++)
             {
                 if (!InfoTable.Columns[column].IsKey)
@@ -186,6 +186,8 @@ namespace ORM
                     var props = entity.GetType().GetProperties();
                     foreach (var prop in props)
                     {
+                        if (!String.IsNullOrEmpty(where))
+                            break;
                         if (prop.CustomAttributes != null)
                         {
                             foreach (var attr in prop.CustomAttributes)
@@ -197,16 +199,24 @@ namespace ORM
                                     else
                                         fieldName = prop.Name;
 
+                                    if (InfoTable.Columns[column].Type == typeof(System.String) || InfoTable.Columns[column].Type == typeof(System.DateTime))
+                                    {
+                                        where = "WHERE " + fieldName + "=" + "'" + prop.GetValue(entity) + "'";
+                                    }
+                                    else
+                                    {
+                                        where = " WHERE " + fieldName + "=" + prop.GetValue(entity);
+                                    }
+                                    break;
                                 }
                             }
                         }
-
                     }
                 }
-                sql.Append(where);
-
-                ConFactory.DbConnection.ExecuteCommand(sql.ToString());
             }
+            
+            sql.Append(where);
+            ConFactory.DbConnection.ExecuteCommand(sql.ToString());
         }
 
 

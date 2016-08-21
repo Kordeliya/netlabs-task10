@@ -13,7 +13,7 @@ namespace DBConnectTest
         {
             ConnectionFactory factory = new SQLCeConnectionFactory(@"Data Source=|DataDirectory|\ForTEST.sdf; Persist Security Info=False;");
             var dataset = factory.DbConnection.ExecuteCommand("SELECT * FROM BOOK  WHERE ID = 3;", "Book");
-
+            Assert.IsNotNull(dataset);
         }
     }
 }

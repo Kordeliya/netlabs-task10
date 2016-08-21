@@ -30,7 +30,7 @@ namespace DBConnect
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                //throw new Exception();
             }
             finally
             {
